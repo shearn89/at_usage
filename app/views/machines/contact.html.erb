@@ -1,0 +1,52 @@
+<div class='span10'>
+	<div class='page-header'>
+	<h1>Get in Touch!
+		<small>Just fill in the following form to provide feedback.</small>
+	</h1>
+	</div>
+	<p><span style='color: #B94A48;'><strong>Note:</strong> All fields are required.</span></p>
+	<%= form_tag dispatch_email_path, :method => :post, :class => 'form-horizontal span7', :id => 'contactForm' do %>
+		<fieldset>
+			<div class='control-group'>
+				<%= label_tag :name, nil, :class => 'control-label' %>
+				<div class='controls'>
+					<%= text_field_tag :name, flash[:name], :placeholder => 'John Smith', :class=> 'required' %>
+				</div>
+			</div>
+			<div class='control-group'>
+				<%= label_tag :email, "Email (else we can't reply!)", :class => 'control-label' %>
+				<div class='controls'>
+					<%= text_field_tag :email, flash[:email], :placeholder => 'e.g. you@mailhost.com', :class=> 'required email' %>
+				</div>
+			</div>
+
+			<div class='control-group'>
+				<%= label_tag :type, nil, :class => 'control-label' %>
+				<div class='controls'>
+					<label class='radio'>
+						<%= radio_button_tag :type, 'bug', flash['bug'] %>Bug
+					</label>
+					<label class='radio'>
+						<%= radio_button_tag :type, 'feature_request', flash['feature_request'] %>Feature request
+					</label>
+					<label class='radio'>
+						<%= radio_button_tag :type, 'feedback', (flash['feedback'] or not flash[:type]) %>Feedback
+					</label>
+				</div>
+			</div>
+
+			<div class='control-group'>
+				<%= label_tag :message, nil, :class => 'control-label' %>
+				<div class='controls'>
+					<%= text_area_tag :message, flash[:message], :rows => 5, :placeholder => 'Your message here...', :class=> 'required' %>
+				</div>
+			</div>
+
+			<div class='form-actions'>
+				<p><%= recaptcha_tags %></p>
+				<p>Please prove you're human!</p>
+				<p><%= submit_tag "Send Message", :class=> 'btn btn-large btn-primary' %></p>
+			</div>
+		</fieldset>
+	<% end %>
+</div>

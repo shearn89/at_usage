@@ -1,0 +1,16 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class='table-condensed table-striped'>
+  <thead>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "lab" %></th>
+    <th><%= sortable "last_checked", "Last Checked" %></th>
+  </tr>
+  </thead>
+  <tbody>
+<% @machines.each do |machine| %>
+	<%= render :partial => 'entry', :object => machine %>
+<% end %>
+</tbody>
+</table>

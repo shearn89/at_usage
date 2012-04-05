@@ -1,0 +1,21 @@
+<div class="row span7">
+	<% if params[:flag] == 'all' and not params[:search] %>
+	<div class='alert alert-success'>
+		<h3>Note:</h3>
+		<p>You are viewing <strong>all machines</strong>.<br />The table headers will sort the data, switching between ascending or descending.</p>
+	</div>
+	<h3 class='ajaxify'><%= link_to "Reset View", url_for('/all') %></h3>
+	<% else %>
+	<div class='alert alert-success'>
+		<h3>Note:</h3>
+		<p>You are viewing the page for a single <strong>set of machines.</strong><br />
+			The set of machines should be highlighted in the navigation menu above.<br />
+			The table headers will sort the data, switching between ascending or descending.</p>
+	</div>
+	<% end %>
+</div>
+<div class='row span10'>
+	<div id='machines'>
+		<%= render 'items', :object => @machines %>
+	</div>
+</div>

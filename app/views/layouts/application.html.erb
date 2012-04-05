@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine Usage in Appleton Tower</title>
+  <%= stylesheet_link_tag    'bootstrap' %>
+  <%= stylesheet_link_tag    'bootstrap-responsive' %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class='navbar navbar-fixed-top'>
+		<div class='navbar-inner'>
+			<div class='container'>
+	            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	            </a>
+				<a href='/' class='brand'>AT Usage</a>
+				<div class="nav-collapse">
+				<ul class='nav'>
+					<li><a href="/">Info</a></li>
+					<li><a href="/all">All Machines</a></li>
+					<li><a href='/available'>Available</a></li>
+					<li><a href='/asleep'>Asleep</a></li>
+					<li><a href='/stale'>Stale</a></li>
+					<li class='dropdown' id='floor_menu'>
+						<a class='dropdown-toggle' data-toggle='dropdown' href='#floor_menu'>
+							Floors
+							<b class="caret"></b>
+						</a>
+						<ul class='dropdown-menu'>
+							<li><a href='/floor/3'>Level 3</a></li>
+							<li><a href='/floor/4'>Level 4</a></li>
+							<li><a href='/floor/5'>Level 5</a></li>
+						</ul>
+					</li>
+					<li class='dropdown' id='lab_menu'>
+						<a class='dropdown-toggle' data-toggle='dropdown' href='#lab_menu'>
+							Labs
+							<b class='caret'></b>
+						</a>
+						<ul class='dropdown-menu'>
+							<% Machine.labs().each_with_index do |lab,i| %>
+								<li><a href="/lab/<%= lab[0]+'/'+lab[1] %>"><%= "#{lab[0]}.#{lab[1]}" %></a></li>
+								<% if i < Machine.labs().length-1 and Machine.labs()[i+1][0] != lab[0]%>
+									<li class='divider'></li>
+								<% end %>
+							<% end %>
+						</ul>
+					</li>
+				</ul>
+				<ul class='nav pull-right'>
+					<li><a href="/contact">Contact</a></li>
+					<li><a href="/api">API</a></li>
+					<li><%= render 'search' %></li>
+				</ul>
+				</div> <!-- end of the collapsing navbar -->
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class='row-fluid'>
+			<div class='span2' id='side'>
+				<h2>Summary</h2>
+				<h3><%= Machine.available %> - <%= Machine.asleep %> - <%= Machine.stale %>[<%= Machine.count %>]</h3>
+				<p>Usage over the last 24hrs:<br /><%= image_tag(url_for(:controller => "machines", :action => "spark_data"), :alt=>"No Sparkline Available.", :id=>"sparkline_img") %></p>
+				<strong>Legend:</strong>
+				<ul>
+					<li><span class='label label-success'>Available</span></li>
+					<li><span class='label'>In Use</span></li>
+					<li><span class='label label-warning'>Asleep</span></li>
+					<li><span class='label label-important'>Stale</span></li>
+				</ul>
+				<hr />
+				<h4>About/Links</h4>
+				<p>This site is built using Ruby on Rails. The styling comes from Twitter's Bootstrap CSS.</p>
+				<p><a href='http://shearn89.com'>Alex Shearn's Homepage</a></p>
+				<div class='alert alert-error' id='bugs'>
+					<h3>Bugs/Requests:</h3>
+					<p>Please report any bugs, issues or feature requests using <%= link_to "this form.", :controller=>'machines', :action=>'contact' %></p>
+				</div>
+			</div>
+			<div class='span10'>
+				<div class='row'>
+					<% if flash[:notice] %>
+					<div class='flash alert alert-success span5'>
+						<h4><%= flash[:notice].html_safe %></h4>
+					</div>
+					<% end %>
+					<% if flash[:error] %>
+					<div class='flash alert alert-error'>
+						<h4><%= flash[:error].html_safe %></h4>
+					</div>
+					<% end %>
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26777119-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

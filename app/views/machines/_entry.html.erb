@@ -1,0 +1,23 @@
+<tr>
+<td class='span6'>
+<% if entry.stale %>
+  <span class='label label-important'><%= entry.name %></span>
+<% elsif entry.offline %>
+  <span class='label label-warning'><%= entry.name %></span>
+<% elsif entry.available %>
+  <span class='label label-success'><%= entry.name %></span>
+<% else %>
+  <span class='label'><%= entry.name %></span>
+<% end %>
+</td>
+<td class='span2'><%= entry.lab %></td>
+<% if entry.last_checked.nil? %>
+	<td></td>
+<% else %>
+	<% if entry.last_checked.today? %>
+	    <td>Today, <%= entry.last_checked.to_formatted_s(:time) %></td>
+	<% else %>
+		<td><%= entry.last_checked.to_formatted_s(:older) %></td>
+	<% end %>
+<% end %>
+</tr>

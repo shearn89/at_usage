@@ -1,0 +1,64 @@
+
+/* main style sheet for all yo goodness */
+
+/* Variables */
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+
+/* main styles */
+
+body {
+	padding-top: 50px;
+	overflow-y: scroll;
+}
+#sparkline_img {
+	width: 160px;
+	height: 51px;
+}
+#bar{
+	width: 80%;
+	max-width: 340px;
+}
+.progress{
+	margin-top: 0;
+	margin-bottom: 9px;
+}
+blockquote{
+	font-style: italic;
+}
+#machines{
+	width: 100%;
+	table {
+		thead {
+			text-align: left;
+		}
+		width: 80%;
+	}
+}
+label {
+	font-weight: bold;
+}
+.table-error {
+  background-color: #f2dede !important;
+  border-color: #eed3d7;
+}
+.table-error {
+  color: #b94a48 !important;
+}
+#bugs{
+	padding: 8px;
+}

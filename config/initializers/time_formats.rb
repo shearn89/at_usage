@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:older] = "%B %-d, %H:%M"

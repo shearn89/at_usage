@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  lab: MyString
+  available: false
+  offline: false
+
+two:
+  name: MyString
+  lab: MyString
+  available: false
+  offline: false

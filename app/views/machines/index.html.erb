@@ -1,0 +1,39 @@
+<div id='main' class='span10'>
+	<section>
+	<div class='page-header'>
+		<h1>Appleton Machine Usage
+			<small>At <%= @estimates[0].to_formatted_s(:time) %>, <%= @estimates[1] %> machines are expected to be in use.</small>
+		</h1>
+	</div>
+	<p>This is the website for Alex Shearn's 4th Year Undergraduate Project, the goal of which was:</p>
+	<blockquote>"Design and build a web interface to allow users to find and locate free machines in Appleton Tower, and to estimate when occupied machines may next be available based on historical data."</blockquote>
+	<p>A brief summary of the current status of the system is given below, along with an estimate of the usage level in the near future. The current 'capacity' of the labs is shown as a gauge, and there's more information at the bottom of the page. If you get lost or stuck, try the <strong>navigation bar</strong> at the top of the page, or read the information below. If you're still stuck, <a href="/contact">get in touch!</a></p>
+	</section>
+	<hr />
+	<section>
+	<div class='page-header'>
+		<h1>Current Capacity
+			<small><%= Machine.available %> machines awake and available, <%= @inuse %> in use (<%= Machine.count() %> total).</small>
+		</h1>
+	</div>
+    <div class="progress progress-info" id='bar'>
+		<div class="bar" style="width: <%= (@inuse.to_f / Machine.count * 100).round %>%;"></div>
+	</div>
+	<p>Currently there are <%= Machine.available %> machines awake and available. There are also <%= @inuse %> in use, and we estimate that there are <%= Machine.asleep %> sleeping machines. A machine is treated as 'asleep' if it has not checked in in the last hour.<p>
+	<p>There are <%= Machine.stale %> machines that have not checked in for a week or more, and are assumed to be broken.</p>
+	<h3>We estimate that at <%= @estimates[0].to_formatted_s(:time) %>, <%= @estimates[1] %> machines are expected to be in use.</h3>
+	<hr />
+	</section>
+	<div class='page-header'>
+		<h1>Info:</h1>
+	</div>
+	<p>If you're <strong>searching</strong> for a specific floor, lab or machine, the links in the navigation bar at the top or the search bar in the top right will be of use.</p>
+	<p>The machines are colour-coded as per the legend in the sidebar on the left, which should be visible on all pages. A machine is considered to be <span class='label label-warning'>asleep</span> if it has not checked in for 1 hour, and <span class='label label-important'>stale</span> if it has not checked in for a week. <strong>Bear in mind</strong> that it is possible for some machines not to be used for a week, if they are in specific rooms or just in unpopular places.</p>
+</div>
+<script type='text/javascript'>
+  $(function(){
+ 	 $('.flash').each(function(){
+ 		 $(this).delay(5000).fadeOut(400);
+ 	 });
+  });
+</script>

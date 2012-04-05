@@ -1,0 +1,96 @@
+<div class='span10'>
+	<section>
+		<div class='page-header'>
+		<h1>API Documentation
+			<small>A basic REST API is available.</small>
+		</h1>
+		</div>
+		<p>This API is to enable the site to be used by scripts (e.g, <a href="http://mpitid.github.com/posts/2012-02-08-benchmark-load-balancing.html">this blog post</a>) without screen-scraping being required.</p>
+		<p>Output is available in <code>.xml</code> and <code>.json</code> formats, in most cases by simply appending the required format to the end of the URL. Full details of the output format are <span style='font-weight: bold; color: #B94A48;'>after the list of methods.</span></p>
+	</section>
+	<section>
+		<div class='page-header'>
+		<h2>Available Methods</h2>
+		</div>
+		<p>This is a full list of available API methods. <strong>Simply append the format you require.</strong> Note that these are also valid as <code>.html</code> requests, but you would also receive the full layout of the page (including navbar, sidebar, warnings, etc).</p>
+		<table class='table table-bordered table-striped'>
+			<thead>
+				<tr>
+					<th class='span3'>URL</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>/machines</td>
+					<td>A list of all machines.</td>
+				</tr>
+				<tr>
+					<td>/machines/available</td>
+					<td>A list of all machines currently available.</td>
+				</tr>
+				<tr>
+					<td>/machines/asleep</td>
+					<td>A list of all machines currently thought to be asleep.</td>
+				</tr>
+				<tr>
+					<td>/machines/stale</td>
+					<td>A list of all machines currently thought to be stale/dead.</td>
+				</tr>
+				<tr>
+					<td>/machine/{id|name}</td>
+					<td>Entry for a specific machine, either by id number (eg <code>/machine/202.xml</code>), or by <strong>short</strong> name (eg <code>machine/mazda.json</code>).</td>
+				</tr>
+				<tr>
+					<td>/floor/{floor}</td>
+					<td>List of all machines on that floor, eg <code>/floor/3.json</code>.</td>
+				</tr>
+				<tr>
+					<td>/lab/{floor}/{room}</td>
+					<td>List of all machines in a particular lab, eg <code>/lab/5/W.xml</code>.</td>
+				</tr>
+				<tr>
+					<td colspan=2 class='table-error'><strong>Note: </strong>you need to remember to append either <code>.xml</code> or <code>.json</code> in order to get the output in the correct format.</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section>
+		<div class='page-header'>
+		<h2>Output Schema</h2>
+		</div>
+		<p>Sending a GET request to a URL with the specified format will return a file in that format. If you request data that may contain more than one machine, you will get an array of machines, as per the two code examples below.</p>
+		<p>If you request data for a single machine, you will only receive data for a single machine. For the xml, this would be a single <code>&lt;machine&gt;</code></machine> tag, and for the json a single <code>{object}</code>.</p>
+		<p>An example array in <code>.xml</code>:</p>
+		<p><pre>&lt;machines type=&quot;array&quot;&gt;
+	  &lt;machine&gt;
+	    &lt;id type=&quot;integer&quot;&gt;105&lt;/id&gt;
+	    &lt;name&gt;arkaig.inf.ed.ac.uk&lt;/name&gt;
+	    &lt;lab&gt;3.01&lt;/lab&gt;
+	    &lt;available type=&quot;boolean&quot;&gt;true&lt;/available&gt;
+	    &lt;offline type=&quot;boolean&quot;&gt;false&lt;/offline&gt;
+	    &lt;created-at type=&quot;datetime&quot;&gt;2011-11-01T12:00:11Z&lt;/created-at&gt;
+	    &lt;updated-at type=&quot;datetime&quot;&gt;2012-02-13T14:11:08Z&lt;/updated-at&gt;
+	    &lt;last-checked type=&quot;datetime&quot;&gt;2012-02-13T14:10:08Z&lt;/last-checked&gt;
+	    &lt;stale type=&quot;boolean&quot;&gt;false&lt;/stale&gt;
+	    &lt;orig-name&gt;AT-3.01_arkaig.inf.ed.ac.uk&lt;/orig-name&gt;
+	  &lt;/machine&gt;
+	  ...
+	&lt;/machines&gt;</pre></p>
+		<p>An example array in <code>.json</code>:</p>
+		<p><pre>[{
+	    "available":true,
+	    "created_at":"2011-11-01T12:00:11Z",
+	    "id":105,
+	    "lab":"3.01",
+	    "last_checked":"2012-02-13T15:25:16Z",
+	    "name":"arkaig.inf.ed.ac.uk",
+	    "offline":false,
+	    "orig_name":"AT-3.01_arkaig.inf.ed.ac.uk",
+	    "stale":false,
+	    "updated_at":"2012-02-13T15:26:07Z"
+	  },
+	  ...
+	]</pre></p>
+	</section>
+</div>

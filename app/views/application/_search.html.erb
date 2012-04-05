@@ -1,0 +1,3 @@
+<%= form_tag ('/all'), :method => 'get', :id => 'machines_search', :class => 'navbar-search pull-right' do %>
+<%= text_field_tag :search, params[:search], :id => 'entry', :placeholder => "Search (name/lab): eg, '3', 'daxter'."%>
+<% end %>
