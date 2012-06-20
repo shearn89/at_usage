@@ -1,2 +1,3 @@
 hostname:port:database:username:password
-
+# eg. localhost:*:*:dbuser:dbpass
+# Don't forget to change permissions on this file: `chmod 0600 .pgpass`

@@ -31,6 +31,7 @@ The server requires some form of web service to be installed (ie, Apache or ngin
     ```
     
     Example for nginx:
+    
     ```
     server {        
          listen 80;
@@ -39,6 +40,7 @@ The server requires some form of web service to be installed (ie, Apache or ngin
          passenger_enabled on;
     }
     ```
+    
     Make sure this host is marked as enabled.
 
 9. Create a database, and grant all privileges on it to a new user with a password. This username/password will be added to the app to connect and store it's local database.
