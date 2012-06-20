@@ -6,7 +6,11 @@ name=`uname -n`
 inuse=`who | grep -c ':0 '`
 qry="INSERT INTO $table (host, usage) VALUES ('$name',$inuse);"
 
-export PGPASSFILE='/path/to/dbpass/file'
-/usr/bin/psql -h pgserver << eof
+number=$RANDOM
+let "number %= 10"
+sleep $number
+
+export PGPASSFILE='/path/to/pgpass/file'
+/usr/bin/psql -h PGSQLHOSTNAME << eof
 $qry
 eof
