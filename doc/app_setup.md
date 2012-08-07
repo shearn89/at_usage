@@ -16,7 +16,7 @@ Now, we edit files to allow connection to the postgreSQL database.
 
 1. Connection details for the server should be added to the top of `script/postgres_update.rb`.
 2. A table should be created on the postgreSQL server, with the following schema. The indices are recommended for speed.
-
+```
      Column  |            Type             |   Modifiers   
     ---------+-----------------------------+---------------
      host    | character varying(32)       | 
@@ -27,7 +27,7 @@ Now, we edit files to allow connection to the postgreSQL database.
         "lt2" btree (date_trunc('min'::text, logtime))
         
     **tl;dr**: `create table usage ( host varchar(32), usage integer, logtime timestamp default now() );`
-
+```
 3. Edit the connection details on line 128 of `machines_controller.rb`.
 4. Edit the "script/db_script.sh" with the path to the .pgpass file (an example is contained in the doc/ folder). Make sure the .pgpass file is readable by the user that the cron task runs as. Also make sure to edit the PGSQLHOSTNAME bit, so the command actually connects.
 
