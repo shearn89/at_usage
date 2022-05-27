@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
-gem 'rack', '1.3.5'
+gem 'rack', '1.3.10'
 gem 'sqlite3'
 gem 'whenever', :require => false
 gem 'pg'
